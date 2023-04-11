@@ -1,8 +1,8 @@
 <?php
     require_once('lib/config.php');
-
-
+//    pour donner la class active à la page consultée
     $currentPage =  basename($_SERVER['SCRIPT_NAME']);
+
 ?>
 
 <!DOCTYPE html>
@@ -25,11 +25,9 @@
         </div>
 
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li class="nav-item"><a href="index.php" class="nav-link px-2 <?php if ($currentPage === 'index.php') { echo 'active'; } ?>">Accueil</a></li>
-            <li class="nav-item"><a href="recettes.php" class="nav-link px-2 <?php if ($currentPage === 'recettes.php') { echo 'active'; } ?>">Nos recettes</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2">Pricing</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2">FAQs</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2">About</a></li>
+            <?php foreach ($mainMenu as $key => $value) { ?>
+            <li class="nav-item"><a href="<?= $key;?>" class="nav-link px-2 <?php if ($currentPage === $key) { echo 'active'; } ?>"><?= $value ;?></a>
+            <?php } ?>
         </ul>
 
         <div class="col-md-3 text-end">
