@@ -1,5 +1,6 @@
 <?php
     require_once('lib/config.php');
+    include('test.php');
 //    pour donner la class active à la page consultée
     $currentPage =  basename($_SERVER['SCRIPT_NAME']);
 

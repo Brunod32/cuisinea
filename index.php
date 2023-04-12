@@ -1,6 +1,8 @@
 <?php
-    require_once('templates/header.php');
-    require_once('lib/recipe.php');
+require_once('templates/header.php');
+require_once('lib/recipe.php');
+include('recettes.php');
+
 ?>
 
     <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
@@ -26,5 +28,5 @@
     </div>
 
 <?php
-    require_once('templates/footer.php');
+require_once('templates/footer.php');
 ?>

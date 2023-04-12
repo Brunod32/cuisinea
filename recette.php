@@ -1,22 +1,22 @@
 <?php
-    require_once('templates/header.php');
-    require_once('lib/recipe.php');
-    require_once('lib/tools.php');
-    include('test.php');
+require_once('templates/header.php');
+require_once('lib/recipe.php');
+require_once('lib/tools.php');
+//include('test.php');
 
-    $id = (int)$_GET['id'];
-    $recipe = getRecipeById($id);
+$id = (int)$_GET['id'];
+$recipe = getRecipeById($id);
 
 
-    if($recipe) {
-        // Permet de recupérer les ingrédients et les afficher en appelant la fonction de tools.php
-        $ingredients = linesToArray($recipe['ingredients']);
-        $instructions = linesToArray($recipe['instructions']);
+if($recipe) {
+    // Permet de recupérer les ingrédients et les afficher en appelant la fonction de tools.php
+    $ingredients = linesToArray($recipe['ingredients']);
+    $instructions = linesToArray($recipe['instructions']);
     ?>
 
     <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
         <div class="col-10 col-sm-8 col-lg-6">
-<!--            appel de la fonction getRecipeImage de recipe.php-->
+            <!--            appel de la fonction getRecipeImage de recipe.php-->
             <img src="<?=getRecipeImage($recipe['image']); ?>" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
         </div>
         <div class="col-lg-6">
@@ -45,12 +45,12 @@
         </ol>
     </div>
 
-    <?php } else { ?>
-        <div class="row text-center">
-            <h1>Oups... recette introuvable</h1>
+<?php } else { ?>
+    <div class="row text-center">
+        <h1>Oups... recette introuvable</h1>
 
-        </div>
-    <?php } ?>
+    </div>
+<?php } ?>
 
 <?php
 require_once('templates/footer.php');
