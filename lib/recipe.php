@@ -17,10 +17,11 @@ function getRecipeImage(string|null $image) {
     }
 }
 
-// Permet de récupérer toutes les recettes en fonction id par order décroissant
+// Permet de récupérer les recettes en fonction id par ordre décroissant
 // int $limit = null permet d'afficher toutes les recettes si aucune limite n'est fixé
+// ORDER BY RAND() : fonction random sql pour ne pas afficher toujours les mêmes recette selon le nbr limite
 function getRecipes(PDO $pdo, int $limit = null) {
-    $sql = 'SELECT * FROM recipes ORDER BY id DESC';
+    $sql = 'SELECT * FROM recipes ORDER BY RAND() DESC';
 
     // si on ajoute une limite du nbr affichage recette
     if ($limit) {
@@ -41,4 +42,17 @@ function getRecipeById(PDO $pdo, int $id) {
     $query->bindParam(':id', $id, PDO::PARAM_INT);
     $query->execute();
     return $recipe = $query->fetch();
+}
+
+function saveRecipe(PDO $pdo, int $category, string $title, string $description, string $ingredients, string $instructions, string|null $image): bool
+{
+    $sql = "INSERT INTO `recipes` (`id`, `category_id`, `title`, `description`, `ingredients`, `instructions`, `image`) VALUES (NULL, :category_id, :title, :description, :ingredients, :instructions, :image);";
+    $query = $pdo->prepare($sql);
+    $query->bindParam(':category_id', $category, PDO::PARAM_INT);
+    $query->bindParam(':title', $title, PDO::PARAM_STR);
+    $query->bindParam(':description', $description, PDO::PARAM_STR);
+    $query->bindParam(':ingredients', $ingredients, PDO::PARAM_STR);
+    $query->bindParam(':instructions', $instructions, PDO::PARAM_STR);
+    $query->bindParam(':image', $image, PDO::PARAM_STR);
+    return $query->execute();
 }

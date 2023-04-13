@@ -12,5 +12,6 @@
     // Pour afficher le menu
     $mainMenu =[
         'index.php' => 'Accueil',
-        'recettes.php' => 'Nos recettes'
+        'recettes.php' => 'Nos recettes',
+        'ajout_modification_recette.php' => 'Ajout/Modification recette'
     ];
