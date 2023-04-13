@@ -2,15 +2,40 @@
 require_once('templates/header.php');
 require_once('lib/recipe.php');
 require_once('lib/tools.php');
+require_once('lib/category.php');
+
+$errors =[];
+$messages =[];
+
+$categories = getCategories($pdo);
 
 if (isset($_POST['saveRecipe'])) {
     $res = saveRecipe($pdo, $_POST['category'], $_POST['title'], $_POST['description'], $_POST['ingredients'], $_POST['instructions'], null);
-    var_dump($res);
+
+    if ($res) {
+        $messages[] = "La recette a bien été sauvegardée";
+    } else {
+        $errors[] = "La recette n\'a  pas été sauvegardée";
+    }
 }
 
 ?>
+<h1 class="text-center">Ajouter une recette</h1>
 
-<!--permet de récupérer le formulaire côté php-->
+<?php foreach($messages as $message) {?>
+    <div class="alert alert-success">
+        <?= $message; ?>
+    </div>
+<?php } ?>
+
+
+<?php foreach($errors as $error) {?>
+    <div class="alert alert-danger">
+        <?= $error; ?>
+    </div>
+<?php } ?>
+
+<!-- enctype="multipart/form-data" permet de récupérer le formulaire côté php-->
 <form method="post" enctype="multipart/form-data">
     <div class="mb-3">
         <label for="title" class="form-label">Nom de la recette</label>
@@ -21,7 +46,7 @@ if (isset($_POST['saveRecipe'])) {
         <textarea name="description" id="description" cols="30" rows="5" class="form-control"></textarea>
     </div>
     <div class="mb-3">
-        <label for="ingredients" class="form-label">Ingredients</label>
+        <label for="ingredients" class="form-label">Ingrédients</label>
         <textarea name="ingredients" id="ingredients" cols="30" rows="5" class="form-control"></textarea>
     </div>
     <div class="mb-3">
@@ -31,9 +56,11 @@ if (isset($_POST['saveRecipe'])) {
     <div class="mb-3">
         <label for="category" class="form-label">Catégorie</label>
         <select name="category" id="category" class="form-select">
-            <option value="1">Entrée</option>
-            <option value="2">Plat</option>
-            <option value="3">Dessert</option>
+
+            <?php foreach($categories as $category) { ?>
+                <option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
+            <?php }?>
+
         </select>
     </div>
 
