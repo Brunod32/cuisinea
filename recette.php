@@ -2,10 +2,9 @@
 require_once('templates/header.php');
 require_once('lib/recipe.php');
 require_once('lib/tools.php');
-//include('test.php');
 
 $id = (int)$_GET['id'];
-$recipe = getRecipeById($id);
+$recipe = getRecipeById($pdo, $id);
 
 
 if($recipe) {

@@ -2,11 +2,8 @@
 require_once('templates/header.php');
 require_once('lib/recipe.php');
 
-$sql = 'SELECT * FROM recipes ORDER BY id DESC';
-$query = $pdo->prepare($sql);
-$query->execute();
-$recipes = $query->fetchAll();
-
+// Recupère toutes les recette en fonction id par order décroissant
+$recipes = getRecipes($pdo);
 ?>
 
     <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
