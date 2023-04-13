@@ -21,7 +21,7 @@ function getRecipeImage(string|null $image) {
 // int $limit = null permet d'afficher toutes les recettes si aucune limite n'est fixé
 // ORDER BY RAND() : fonction random sql pour ne pas afficher toujours les mêmes recette selon le nbr limite
 function getRecipes(PDO $pdo, int $limit = null) {
-    $sql = 'SELECT * FROM recipes ORDER BY RAND() DESC';
+    $sql = 'SELECT * FROM recipes ORDER BY id DESC';
 
     // si on ajoute une limite du nbr affichage recette
     if ($limit) {
