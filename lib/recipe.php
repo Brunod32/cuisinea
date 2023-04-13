@@ -18,9 +18,19 @@ function getRecipeImage(string|null $image) {
 }
 
 // Permet de récupérer toutes les recettes en fonction id par order décroissant
-function getRecipes(PDO $pdo) {
+// int $limit = null permet d'afficher toutes les recettes si aucune limite n'est fixé
+function getRecipes(PDO $pdo, int $limit = null) {
     $sql = 'SELECT * FROM recipes ORDER BY id DESC';
+
+    // si on ajoute une limite du nbr affichage recette
+    if ($limit) {
+        $sql .= ' LIMIT :limit';
+    }
     $query = $pdo->prepare($sql);
+    if ($limit) {
+        $query->bindParam(':limit', $limit, PDO::PARAM_INT);
+    }
+
     $query->execute();
     return $query->fetchAll();
 }
