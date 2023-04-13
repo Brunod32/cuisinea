@@ -2,6 +2,7 @@
 <project version="4">
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/cuisinea.sql" dialect="MariaDB" />
+    <file url="file://$PROJECT_DIR$/lib/user.php" dialect="MariaDB" />
     <file url="file://$PROJECT_DIR$/recette.php" dialect="MariaDB" />
   </component>
 </project>

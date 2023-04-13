@@ -15,7 +15,7 @@ if($recipe) {
 
     <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
         <div class="col-10 col-sm-8 col-lg-6">
-            <!--            appel de la fonction getRecipeImage de recipe.php-->
+            <!-- appel de la fonction getRecipeImage de recipe.php-->
             <img src="<?=getRecipeImage($recipe['image']); ?>" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
         </div>
         <div class="col-lg-6">
