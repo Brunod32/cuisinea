@@ -4,6 +4,10 @@ require_once('lib/recipe.php');
 require_once('lib/tools.php');
 require_once('lib/category.php');
 
+if(!isset($_SESSION['user'])) {
+    header("Location: login.php" );
+}
+
 $errors =[];
 $messages =[];
 //Pour ne pas vider les champs si pb lors de l'enregistrement, + ligne 47

@@ -1,29 +1,20 @@
 <?php
     require_once('templates/header.php');
+    require_once('lib/user.php');
 
     $errors = [];
     $messages = [];
 
-    $users = [
-        ['email'=>'abc@test.com', 'password'=>'1234'],
-        ['email'=>'test@test.com', 'password'=>'test'],
-    ];
-
     if(isset($_POST['loginUser'])) {
-        $query = $pdo->prepare("SELECT * FROM users WHERE email = :email");
-        $query->bindParam(':email', $_POST['email'], PDO::PARAM_STR);
-        $query->execute();
-        $user =  $recipe = $query->fetch();
-
-        if ($user && $user['password'] === $_POST['password']) {
-            $messages[] = 'Connexion OK';
+        $user = verifyLoginPassword($pdo, $_POST['email'], $_POST['password']);
+        if ($user) {
+            $_SESSION['user'] = ['email' => $user['email']];
+            header("Location: index.php" );
         } else {
-            $errors[] = "Email ou mdp incorrect";
+            $errors[] = "Email ou mot de passe incorrect";
         }
 
     }
-
-
 
 
 ?>
@@ -55,7 +46,7 @@
 
 
         <div class="mb-3">
-            <input type="submit" value="Enregistrer" name="loginUser" class="btn btn-primary">
+            <input type="submit" value="Se connecter" name="loginUser" class="btn btn-primary">
         </div>
 
     </form>
