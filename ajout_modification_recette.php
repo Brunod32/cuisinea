@@ -4,6 +4,7 @@ require_once('lib/recipe.php');
 require_once('lib/tools.php');
 require_once('lib/category.php');
 
+// Si pas de user, on redirige vers page de login
 if(!isset($_SESSION['user'])) {
     header("Location: login.php" );
 }

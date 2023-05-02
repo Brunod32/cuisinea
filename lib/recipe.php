@@ -1,11 +1,5 @@
 <?php
 
-//$recipes = [
-//    ['title' => 'Mousse au chocolat', 'description' => 'un super dessert', 'image' => '1-chocolate-au-mousse.jpg'],
-//    ['title' => 'Gratin dauphinois', 'description' => 'du gratin', 'image' => '2-gratin-dauphinois.jpg'],
-//    ['title' => 'Salade', 'description' => 'plat pour l\'été', 'image' => '3-salade.jpg']
-//];
-
 // Gestion de recette qui n'existerait pas
 // grâce à |null , la fonction va accpeter un type string ou null, sans le programme plante
 function getRecipeImage(string|null $image) {
@@ -54,5 +48,13 @@ function saveRecipe(PDO $pdo, int $category, string $title, string $description,
     $query->bindParam(':ingredients', $ingredients, PDO::PARAM_STR);
     $query->bindParam(':instructions', $instructions, PDO::PARAM_STR);
     $query->bindParam(':image', $image, PDO::PARAM_STR);
+    return $query->execute();
+}
+
+function deleteRecipe(PDO $pdo, int $id)
+{
+    $sql = "DELETE FROM `recipes` WHERE id = :id";
+    $query = $pdo->prepare($sql);
+    $query->bindParam(':id', $id, PDO::PARAM_INT);
     return $query->execute();
 }

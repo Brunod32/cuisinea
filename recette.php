@@ -6,12 +6,31 @@ require_once('lib/tools.php');
 $id = (int)$_GET['id'];
 $recipe = getRecipeById($pdo, $id);
 
+//Suppression de recette
+$recipeToDelete = deleteRecipe($pdo, $id);
+//var_dump($recipeToDelete);
+ if(isset($_SESSION['user'])) {
+     $errors = [];
+     $messages = [];
+     if (isset($_POST['recipeToDelete']) && $_GET['id'] === $id) {
+        if (!$errors) {
+            $res = deleteRecipe($pdo, $_GET['id']);
+            if ($res) {
+                $messages[] = "La recette a bien été supprimée";
+                header("location: index.php");
+            } else {
+                $errors[] = "La recette n\'a  pas été supprimée";
+            }
+        }
+    }
+ }
 
 if($recipe) {
     // Permet de recupérer les ingrédients et les afficher en appelant la fonction de tools.php
     $ingredients = linesToArray($recipe['ingredients']);
     $instructions = linesToArray($recipe['instructions']);
-    ?>
+
+?>
 
     <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
         <div class="col-10 col-sm-8 col-lg-6">
@@ -44,10 +63,16 @@ if($recipe) {
         </ol>
     </div>
 
+    <?php
+    if(isset($_SESSION['user'])) { ?>
+        <form method="post" enctype="multipart/form-data">
+            <input type="submit" value="Supprimer" name="recipeToDelete" class="btn btn-primary">
+        </form>
+    <?php } ?>
+
 <?php } else { ?>
     <div class="row text-center">
         <h1>Oups... recette introuvable</h1>
-
     </div>
 <?php } ?>
 

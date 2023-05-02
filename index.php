@@ -12,7 +12,7 @@ $recipes = getRecipes($pdo, _HOME_RECIPES_LIMIT_);
         </div>
         <div class="col-lg-6">
             <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Cuisinea - Recettes de cuisine</h1>
-            <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
+            <p class="lead">Application de gestion de recettes de cuisine pour les gourmands !</p>
             <div class="d-grid gap-2 d-md-flex justify-content-md-start">
                 <a href="recettes.php" class="btn btn-primary">Voir nos recettes</a>
             </div>
