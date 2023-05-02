@@ -57,4 +57,5 @@ function deleteRecipe(PDO $pdo, int $id)
     $query = $pdo->prepare($sql);
     $query->bindParam(':id', $id, PDO::PARAM_INT);
     return $query->execute();
+    echo 'Recette supprimée';
 }

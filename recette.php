@@ -7,17 +7,15 @@ $id = (int)$_GET['id'];
 $recipe = getRecipeById($pdo, $id);
 
 //Suppression de recette
-$recipeToDelete = deleteRecipe($pdo, $id);
-//var_dump($recipeToDelete);
  if(isset($_SESSION['user'])) {
      $errors = [];
      $messages = [];
-     if (isset($_POST['recipeToDelete']) && $_GET['id'] === $id) {
+     if (isset($_POST['recipeToDelete'])) {
         if (!$errors) {
             $res = deleteRecipe($pdo, $_GET['id']);
             if ($res) {
                 $messages[] = "La recette a bien été supprimée";
-                header("location: index.php");
+                header("location: recettes.php");
             } else {
                 $errors[] = "La recette n\'a  pas été supprimée";
             }
@@ -65,9 +63,13 @@ if($recipe) {
 
     <?php
     if(isset($_SESSION['user'])) { ?>
-        <form method="post" enctype="multipart/form-data">
-            <input type="submit" value="Supprimer" name="recipeToDelete" class="btn btn-primary">
-        </form>
+        <div class="d-flex justify-content-end">
+            <form method="post" enctype="multipart/form-data">
+<!--                ne pas oublier d'ajouter un input hidden avec en value l'id de la recette -->
+                <input type="hidden" name="recipeToDelete" value="<?=$recipe['id']; ?>">
+                <input type="submit" class="btn btn-danger" value="Supprimer la recette">
+            </form>
+        </div>
     <?php } ?>
 
 <?php } else { ?>
