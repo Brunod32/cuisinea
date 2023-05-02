@@ -31,7 +31,6 @@ function getRecipes(PDO $pdo, int $limit = null) {
 }
 
 function getRecipeById(PDO $pdo, int $id) {
-    //$pdo = new PDO('mysql:host=localhost:3307;dbname=cuisinea;charset=utf8mb4', 'root', 'Bandit@1200');
     $query = $pdo->prepare("SELECT * FROM recipes WHERE id = :id");
     $query->bindParam(':id', $id, PDO::PARAM_INT);
     $query->execute();

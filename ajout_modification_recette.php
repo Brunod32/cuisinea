@@ -11,7 +11,7 @@ if(!isset($_SESSION['user'])) {
 
 $errors =[];
 $messages =[];
-//Pour ne pas vider les champs si pb lors de l'enregistrement, + ligne 47
+//Pour ne pas vider les champs si pb lors de l'enregistrement, + cf *
 $recipe = [
     'title' => '',
     'description' => '',
@@ -49,7 +49,7 @@ if (isset($_POST['saveRecipe'])) {
         }
     }
 
-    //Pour ne pas vider les champs si pb lors de l'enregistrement
+    // *  Pour ne pas vider les champs si pb lors de l'enregistrement
     $recipe = [
         'title' => $_POST['title'],
         'description' => $_POST['description'],
